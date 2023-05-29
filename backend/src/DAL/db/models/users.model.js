@@ -22,15 +22,15 @@ const usersSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    cart: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'carts'
-    },
     role: {
         type: String,
         enum: ["admin", "user"],
-        default: 'user'
-    }
+        default: "user"
+    },
+    cart: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Carts"
+    },
 })
 
 export const usersModel = mongoose.model("Users", usersSchema);

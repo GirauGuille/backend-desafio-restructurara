@@ -11,11 +11,15 @@ import session from 'express-session';
 import FileStore from 'session-file-store';
 import MongoStore from 'connect-mongo';
 import passport from 'passport';
-import './controller/passportStrategies.js';
+import cors from 'cors';
+import config from './config/config.js';
+import './passport/passportStrategies.js';
 
 const app = express();
-const PORT = 8080;
+const PORT = config.PORT;
 const FileStoreSession = FileStore(session);
+app.use(cors());
+
 
 /* cookie */
 app.use(cookieParser());
@@ -33,7 +37,7 @@ app.set('view engine', 'handlebars');
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: 'mongodb+srv://girauguillermo:giraug@cluster0.bfpv0cy.mongodb.net/electrogirau?retryWrites=true&w=majority',
+        mongoUrl: config.mongo_uri,
     }),
     resave: false,
     saveUninitialized: false,
@@ -52,7 +56,7 @@ app.use('/', viewsRouter)
 app.get('/', (req, res) => {
     res.redirect('/login');
 });
-app.set("port", process.env.PORT || 8080);
+app.set("port", PORT || 8080);
 
 /* server */
 const httpServer = app.listen(PORT, () => {

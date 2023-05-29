@@ -1,11 +1,6 @@
 import mongoose from 'mongoose';
 
 const cartsSchema = new mongoose.Schema({
-    // products: {
-    //     type: Array,
-    //     required: true,
-    //     default: []
-    // },
     products: [{
         pid: { type: mongoose.Schema.Types.ObjectId, ref: 'Products' },
         quantity: { type: Number },
@@ -18,7 +13,8 @@ const cartsSchema = new mongoose.Schema({
     }
 });
 
-cartsSchema.pre('findOne', function (next) {;
+cartsSchema.pre('findOne', function (next) {
+    ;
     this.populate('products.pid');
     next();
 });

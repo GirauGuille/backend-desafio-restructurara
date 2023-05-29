@@ -1,9 +1,7 @@
 import jwt from 'jsonwebtoken';
 
-// Secret key
 const secret = "EOsecretkey";
 
-// Genera un token con la información del usuario
 export const generateToken = (user) => {
     const data = {
         id: user._id,

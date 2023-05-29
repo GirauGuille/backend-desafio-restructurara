@@ -4,8 +4,6 @@ import jwt from 'jsonwebtoken';
 const secret = "EOsecretkey";
 
 export const auth = async (req, res, next) => {
-    // console.log("HOLA MID:", req)
-    // console.log("2 HOLA MID:", req.session.passport?.user)
     try {
         if (req.session.passport?.user) {
             next();
